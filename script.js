@@ -53,7 +53,7 @@ function switchMode() {
     isWorkTime = !isWorkTime;
     timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
     totalTime = timeLeft;
-    modeText.textContent = isWorkTime ? 'Get it' : 'Chillin';
+    modeText.textContent = isWorkTime ? 'Get it' : 'Chill';
     updateDisplay();
     updateProgress();
 }
@@ -72,10 +72,11 @@ function startTimer() {
             chillButton.style.background = '';
         }
 
-        if (timeLeft === undefined) {
-            timeLeft = WORK_TIME;
-        }
-        totalTime = isWorkTime ? WORK_TIME : BREAK_TIME;
+        // Reset the timer to full work/break time when starting
+        timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
+        totalTime = timeLeft;
+        modeText.textContent = isWorkTime ? 'Get it' : 'Chill';
+        
         timerId = setInterval(() => {
             timeLeft--;
             updateDisplay();
@@ -114,7 +115,7 @@ function resetTimer() {
     isWorkTime = true;
     timeLeft = WORK_TIME;
     totalTime = WORK_TIME;
-    modeText.textContent = 'Get it!';
+    modeText.textContent = 'Get it';
     startButton.textContent = 'Start';
     startButton.classList.remove('stop');
     updateDisplay();
@@ -172,7 +173,10 @@ function startChill() {
         chillButton.querySelector('span').textContent = 'Chill (5:00)';
         chillButton.classList.remove('chill-active');
         chillButton.style.background = '';
-        modeText.textContent = isWorkTime ? 'Get it' : 'Break Time';
+        modeText.textContent = isWorkTime ? 'Get it' : 'Chill';
+        // Reset work/break timer to full time
+        timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
+        totalTime = timeLeft;
         startTimer();
         return;
     }
@@ -212,7 +216,7 @@ function startChill() {
         chillTimeLeft = CHILL_TIME;
         chillButton.querySelector('span').textContent = 'Chill (5:00)';
         chillButton.classList.remove('chill-active');
-        modeText.textContent = isWorkTime ? 'Get it' : 'Break Time';
+        modeText.textContent = isWorkTime ? 'Get it' : 'Chill';
         startTimer();
     }, CHILL_TIME * 1000);
 }
@@ -225,7 +229,7 @@ function updateTitle() {
     if (chillTimeoutId) {
         document.title = `${timeString} - Chilling`;
     } else {
-        document.title = `${timeString} - ${isWorkTime ? 'Work' : 'Break'}`;
+        document.title = `${timeString} - ${isWorkTime ? 'Get It' : 'Chill'}`;
     }
 }
 
