@@ -167,6 +167,7 @@ function startChill() {
         chillButton.querySelector('span').textContent = 'Chill (5:00)';
         chillButton.classList.remove('chill-active');
         chillButton.style.background = '';
+        modeText.textContent = isWorkTime ? 'Get it' : 'Break Time';
         startTimer();
         return;
     }
@@ -180,6 +181,7 @@ function startChill() {
 
     chillTimeLeft = CHILL_TIME;
     chillButton.classList.add('chill-active');
+    modeText.textContent = 'Chill';
     updateChillDisplay();
     
     chillIntervalId = setInterval(() => {
@@ -205,6 +207,7 @@ function startChill() {
         chillTimeLeft = CHILL_TIME;
         chillButton.querySelector('span').textContent = 'Chill (5:00)';
         chillButton.classList.remove('chill-active');
+        modeText.textContent = isWorkTime ? 'Get it' : 'Break Time';
         startTimer();
     }, CHILL_TIME * 1000);
 }
