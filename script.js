@@ -46,6 +46,7 @@ function updateDisplay() {
     const seconds = timeLeft % 60;
     minutesDisplay.textContent = minutes.toString().padStart(2, '0');
     secondsDisplay.textContent = seconds.toString().padStart(2, '0');
+    updateTitle();
 }
 
 function switchMode() {
@@ -118,6 +119,7 @@ function resetTimer() {
     startButton.classList.remove('stop');
     updateDisplay();
     updateProgress();
+    document.title = '25:00 - Work';
 }
 
 function rotateQuote() {
@@ -144,6 +146,9 @@ function updateChillDisplay() {
     const seconds = chillTimeLeft % 60;
     const progressPercent = (chillTimeLeft / CHILL_TIME) * 100;
     chillButton.querySelector('span').textContent = `Chill (${minutes}:${seconds.toString().padStart(2, '0')})`;
+    
+    // Update title with chill time
+    document.title = `${minutes}:${seconds.toString().padStart(2, '0')} - Chilling`;
     
     // Update progress bar
     if (chillTimeoutId) {
@@ -210,6 +215,18 @@ function startChill() {
         modeText.textContent = isWorkTime ? 'Get it' : 'Break Time';
         startTimer();
     }, CHILL_TIME * 1000);
+}
+
+function updateTitle() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    if (chillTimeoutId) {
+        document.title = `${timeString} - Chilling`;
+    } else {
+        document.title = `${timeString} - ${isWorkTime ? 'Work' : 'Break'}`;
+    }
 }
 
 startButton.addEventListener('click', startTimer);
