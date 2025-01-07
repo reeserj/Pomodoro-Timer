@@ -299,4 +299,39 @@ body {
 
 .controls button.chill-active:hover {
     background-color: #8e44ad !important;
+}
+
+.focus-banner {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin: 1rem auto;
+    font-size: 0.9rem;
+    max-width: 90%;
+    animation: bannerPulse 2s infinite;
+}
+
+.focus-banner a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 1px dashed white;
+}
+
+.focus-banner a:hover {
+    border-bottom: 1px solid white;
+    text-shadow: 0 0 5px rgba(255,255,255,0.5);
+}
+
+@keyframes bannerPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
 } 
