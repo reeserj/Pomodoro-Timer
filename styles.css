@@ -309,6 +309,10 @@ body {
     margin: 1rem auto;
     font-size: 0.9rem;
     max-width: 90%;
+    transition: transform 0.3s ease;
+}
+
+.focus-banner:hover {
     animation: bannerPulse 2s infinite;
 }
 
